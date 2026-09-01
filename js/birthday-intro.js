@@ -21,6 +21,6 @@
       burstOpenFromCenter(items, function () {
         burstLayer.remove();
       });
-    }, 250);
+    }, 150);
   });
 })();
