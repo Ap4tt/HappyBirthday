@@ -1,0 +1,111 @@
+/* =========================================================
+   Birthday Pixel Web — Shared Styles
+   Dipakai di semua halaman (loading, login, dst).
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pixelify+Sans:wght@400..700&display=swap');
+
+:root {
+  --pink-bg:    #FFD6E3;
+  --pink-deep:  #FFB3C6; 
+  --red:        #E63946; 
+  --red-dark:   #9D2235; 
+  --cream:      #FFF5F5; 
+  --gold:       #FFE9A8; 
+  --text-main:  #5C1A24; 
+  --text-soft:  #7A1F2B;
+
+  --font-display: 'Press Start 2P', monospace;
+  --font-body: 'Pixelify Sans', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 18px;
+  color: var(--text-main);
+  background: var(--pink-bg);
+  background-image:
+    radial-gradient(var(--pink-deep) 2px, transparent 2px);
+  background-size: 28px 28px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+img, svg {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+input {
+  font-family: var(--font-body);
+}
+
+::selection {
+  background: var(--red);
+  color: var(--cream);
+}
+
+.lang-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 50;
+  display: flex;
+  gap: 2px;
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(255, 255, 255, 0.65);
+  border-radius: 999px;
+  box-shadow: 0 4px 16px rgba(157, 34, 53, 0.18);
+}
+
+.lang-toggle-btn {
+  font-family: var(--font-display);
+  font-size: 0.55rem;
+  letter-spacing: 0.5px;
+  color: var(--text-main);
+  background: transparent;
+  border: none;
+  border-radius: 999px;
+  padding: 7px 13px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.lang-toggle-btn:hover:not(.is-active) {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.lang-toggle-btn.is-active {
+  background: var(--red);
+  color: var(--cream);
+}
+
+.lang-toggle-btn:focus-visible {
+  outline: 2px dashed var(--text-main);
+  outline-offset: 3px;
+}
+
+@media (max-width: 420px) {
+  .lang-toggle {
+    top: 12px;
+    right: 12px;
+  }
+}

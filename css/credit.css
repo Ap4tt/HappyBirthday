@@ -1,0 +1,26 @@
+.made-by {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 40; 
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  opacity: 0.75;
+  pointer-events: none;
+  user-select: none;
+}
+
+.made-by a {
+  color: inherit;
+  text-decoration: underline;
+  pointer-events: auto; 
+}
+
+@media (max-width: 420px) {
+  .made-by {
+    left: 14px;
+    bottom: 14px;
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pixelify+Sans:wght@400..700&family=VT323&family=Silkscreen:wght@400;700&family=Jersey+10&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playwrite+BR+Guides&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kablammo&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Akronim&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fontdiner+Swanky&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/burst.css" />
+  <link rel="stylesheet" href="css/rain.css" />
+  <link rel="stylesheet" href="css/birthday.css" />
+  <link rel="stylesheet" href="css/music-fab.css" />
+  <link rel="stylesheet" href="css/credit.css">
+</head>
+<body>
+  <!-- Toggle bahasa & FAB musik sengaja di LUAR .blur-wrapper,
+       biar gak ikut keblur/nge-disable pas wish overlay kebuka. -->
+  <div class="lang-toggle" role="group" aria-label="Language switcher">
+    <button type="button" class="lang-toggle-btn is-active" data-lang="id">ID</button>
+    <button type="button" class="lang-toggle-btn" data-lang="en">EN</button>
+  </div>
+
+  <div class="blur-wrapper" id="blurWrapper">
+    <div class="rain-layer" id="rainLayer" aria-hidden="true"></div>
+
+    <div class="rain-hint" id="rainHint">
+      <p id="rainHintText"></p>
+    </div>
+
+    <main class="birthday-content">
+      <p class="bday-hello" id="bdayHello"></p>
+      <h1 class="bday-name" id="bdayName"></h1>
+      <p class="bday-age-line" id="bdayAgeLine"></p>
+    </main>
+  </div>
+
+  <!-- Muncul pas salah satu item hujan diklik -->
+  <div class="wish-overlay" id="wishOverlay" hidden>
+    <div class="wish-box" id="wishBox">
+      <p class="wish-title" id="wishTitle"></p>
+      <div class="wish-paragraphs" id="wishParagraphs"></div>
+    </div>
+  </div>
+
+  <button type="button" class="wish-close-fixed" id="wishClose" aria-label="Tutup">✕</button>
+
+  <!-- ==== Floating music player ==== -->
+<div class="music-fab" id="musicFab">
+  <div class="fab-panel" id="fabPanel">
+    <button type="button" class="fab-disc-btn" id="fabTrigger" aria-label="Buka menu musik" aria-expanded="false">
+      <img src="images/disc.png" alt="" class="fab-disc-img" />
+      <span class="fab-arrow" aria-hidden="true">▲</span>
+    </button>
+
+    <div class="fab-menu" id="fabMenu" hidden>
+      <button type="button" class="fab-menu-btn" id="muteBtn" aria-label="Mute">
+        <img src="images/icon-mute.png" alt="" />
+      </button>
+      <button type="button" class="fab-menu-btn" id="pauseBtn" aria-label="Pause">
+        <img src="images/icon-pause.png" alt="" />
+      </button>
+      <button type="button" class="fab-menu-btn" id="libraryBtn" aria-label="Library">
+        <img src="images/icon-library.png" alt="" />
+      </button>
+    </div>
+  </div>
+
+  <div class="library-panel" id="libraryPanel" hidden>
+    <ul class="library-list" id="libraryList"></ul>
+  </div>
+</div>
+
+  <audio id="bgAudio" loop></audio>
+
+  <div class="burst-layer" id="burstLayer" aria-hidden="true"></div>
+
+  <p class="made-by">&ltMade by Apat&gt</p>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/wishes.js"></script>
+  <script src="js/songs.js"></script>
+  <script src="js/burst.js"></script>
+  <script src="js/birthday-intro.js"></script>
+  <script src="js/birthday.js"></script>
+  <script src="js/rain.js"></script>
+  <script src="js/music-fab.js"></script>
+</body>
+</html>

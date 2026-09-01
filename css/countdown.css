@@ -1,0 +1,119 @@
+/* =========================================================
+   Result pages (too-early & too-late) — pesan tanggal + countdown
+   ========================================================= */
+
+.result-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 44px;
+  padding: 32px 20px;
+  text-align: center;
+}
+
+/* Pesan — sengaja TANPA card/box, nempel langsung ke background */
+.wish-message {
+  max-width: 620px;
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: var(--text-main);
+}
+
+.wish-message #msgDate {
+  color: var(--red);
+  font-weight: 700;
+}
+
+/* ---- Baris kotak countdown ---- */
+.countdown-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.countdown-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: var(--cream);
+  border: 4px solid var(--text-main);
+  box-shadow: 6px 6px 0 0 var(--red-dark);
+  padding: 18px 16px;
+  min-width: 84px;
+
+  /* muncul satu-satu pas halaman kebuka */
+  opacity: 0;
+  transform: translateY(16px) scale(0.85);
+  animation: box-pop-in 0.45s ease forwards;
+}
+
+.countdown-box:nth-child(1) { animation-delay: 0.05s; }
+.countdown-box:nth-child(2) { animation-delay: 0.2s; }
+.countdown-box:nth-child(3) { animation-delay: 0.35s; }
+.countdown-box:nth-child(4) { animation-delay: 0.5s; }
+
+@keyframes box-pop-in {
+  0% { opacity: 0; transform: translateY(16px) scale(0.85); }
+  60% { opacity: 1; transform: translateY(-4px) scale(1.06); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.countdown-value {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--red);
+  min-width: 2ch;
+}
+
+/* animasi "tick" — jalan tiap kali angkanya ganti (dipicu lewat JS) */
+.countdown-value.is-ticking {
+  animation: countdown-tick 0.4s steps(6);
+}
+
+@keyframes countdown-tick {
+  0% { transform: scale(1) rotate(0deg); color: var(--red); }
+  30% { transform: scale(1.3) rotate(-4deg); color: var(--red-dark); }
+  60% { transform: scale(0.9) rotate(3deg); }
+  100% { transform: scale(1) rotate(0deg); color: var(--red); }
+}
+
+.countdown-label {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  color: var(--text-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .countdown-box {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .countdown-value.is-ticking {
+    animation: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .wish-message {
+    font-size: 1rem;
+  }
+  .countdown-box {
+    min-width: 66px;
+    padding: 14px 10px;
+  }
+  .countdown-value {
+    font-size: 1.4rem;
+  }
+  .result-page {
+    gap: 32px;
+  }
+}

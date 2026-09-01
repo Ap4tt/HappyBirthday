@@ -1,0 +1,74 @@
+/* =========================================================
+   Burst bunga+hati — dipakai bareng di envelope.html (fase
+   terbang keluar) & birthday.html (fase buka dari tengah).
+   ========================================================= */
+
+.burst-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 200;
+}
+
+.burst-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  image-rendering: pixelated;
+  transform: translate(-50%, -50%) scale(1) rotate(var(--rot));
+}
+
+/* Fase 1 — terbang dari satu titik asal (amplop) ke posisi akhirnya */
+.burst-item.is-flying {
+  animation-name: burst-fly-in;
+  animation-timing-function: cubic-bezier(0.22, 0.8, 0.32, 1);
+  animation-fill-mode: forwards;
+}
+
+@keyframes burst-fly-in {
+  0% {
+    transform: translate(calc(-50% + var(--fromDx)), calc(-50% + var(--fromDy))) scale(0) rotate(var(--rot));
+    opacity: 0;
+  }
+  18% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1) rotate(var(--rot));
+    opacity: 1;
+  }
+}
+
+.burst-item.is-settled {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1) rotate(var(--rot));
+}
+
+/* Fase 2 — membuka dari tengah: partikel kabur menjauhi titik tengah
+   layar sampai halaman di baliknya keliatan. */
+.burst-item.is-opening {
+  animation-name: burst-open;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+@keyframes burst-open {
+  0% {
+    transform: translate(-50%, -50%) scale(1) rotate(var(--rot));
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--openDx)), calc(-50% + var(--openDy))) scale(1.4) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .burst-item.is-flying,
+  .burst-item.is-opening {
+    animation-duration: 0.01s !important;
+    animation-delay: 0s !important;
+  }
+}

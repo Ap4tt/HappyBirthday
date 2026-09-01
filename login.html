@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title></title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/login.css" />
+  <link rel="stylesheet" href="css/credit.css">
+</head>
+<body>
+  <div class="lang-toggle" role="group" aria-label="Language switcher">
+    <button type="button" class="lang-toggle-btn is-active" data-lang="id">ID</button>
+    <button type="button" class="lang-toggle-btn" data-lang="en">EN</button>
+  </div>
+
+  <main class="login-page">
+    <section class="invite-card">
+      <img class="corner-drip corner-drip-tr" src="images/cream-corner-tr.png" alt="" aria-hidden="true" />
+      <img class="corner-drip corner-drip-bl" src="images/cream-corner-bl.png" alt="" aria-hidden="true" />
+
+      <h1 class="siapa-kamu" id="heading">Siapa Kamu?</h1>
+
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label for="name" id="nameLabel"></label>
+          <input type="text" id="name" name="name" placeholder="cth: Aya" autocomplete="off" />
+          <span class="field-error" id="nameError"></span>
+        </div>
+
+        <div class="field">
+          <label id="birthdateLabel"></label>
+          <div class="date-select-group" role="group" aria-labelledby="birthdateLabel">
+            <div class="pixel-dropdown" data-name="day">
+              <button type="button" class="dropdown-trigger" aria-haspopup="listbox" aria-expanded="false">
+                <span class="dropdown-value"></span>
+                <span class="dropdown-arrow">▼</span>
+              </button>
+              <div class="dropdown-panel" hidden>
+                <ul class="dropdown-list" role="listbox" tabindex="-1"></ul>
+              </div>
+              <input type="hidden" id="birthDay" />
+            </div>
+
+            <div class="pixel-dropdown" data-name="month">
+              <button type="button" class="dropdown-trigger" aria-haspopup="listbox" aria-expanded="false">
+                <span class="dropdown-value"></span>
+                <span class="dropdown-arrow">▼</span>
+              </button>
+              <div class="dropdown-panel" hidden>
+                <ul class="dropdown-list" role="listbox" tabindex="-1"></ul>
+              </div>
+              <input type="hidden" id="birthMonth" />
+            </div>
+
+            <div class="pixel-dropdown" data-name="year">
+              <button type="button" class="dropdown-trigger" aria-haspopup="listbox" aria-expanded="false">
+                <span class="dropdown-value"></span>
+                <span class="dropdown-arrow">▼</span>
+              </button>
+              <div class="dropdown-panel" hidden>
+                <ul class="dropdown-list" role="listbox" tabindex="-1"></ul>
+              </div>
+              <input type="hidden" id="birthYear" />
+            </div>
+          </div>
+          <span class="field-error" id="birthdateError"></span>
+        </div>
+
+        <button type="submit" class="pixel-btn"><span id="submitBtnLabel"></span> <span class="btn-arrow">▶</span></button>
+      </form>
+    </section>
+  </main>
+
+  <p class="made-by">&ltMade by Apat&gt</p>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

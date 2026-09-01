@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title></title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/countdown.css" />
+  <link rel="stylesheet" href="css/credit.css">
+</head>
+<body data-page="too-late">
+  <div class="lang-toggle" role="group" aria-label="Language switcher">
+    <button type="button" class="lang-toggle-btn is-active" data-lang="id">ID</button>
+    <button type="button" class="lang-toggle-btn" data-lang="en">EN</button>
+  </div>
+
+  <main class="result-page">
+    <p class="wish-message">
+      <span id="msgPart1"></span><span id="msgName"></span><span id="msgPart2"> </span><span id="msgDate"></span><span id="msgPart3"></span>
+    </p>
+
+    <div class="countdown-row">
+      <div class="countdown-box">
+        <span class="countdown-value" id="cdDays">00</span>
+        <span class="countdown-label" id="cdDaysLabel">Hari</span>
+      </div>
+      <div class="countdown-box">
+        <span class="countdown-value" id="cdHours">00</span>
+        <span class="countdown-label" id="cdHoursLabel">Jam</span>
+      </div>
+      <div class="countdown-box">
+        <span class="countdown-value" id="cdMinutes">00</span>
+        <span class="countdown-label" id="cdMinutesLabel">Menit</span>
+      </div>
+      <div class="countdown-box">
+        <span class="countdown-value" id="cdSeconds">00</span>
+        <span class="countdown-label" id="cdSecondsLabel">Detik</span>
+      </div>
+    </div>
+  </main>
+
+  <p class="made-by">&ltMade by Apat&gt</p>
+  
+  <script src="js/i18n.js"></script>
+  <script src="js/countdown.js"></script>
+</body>
+</html>

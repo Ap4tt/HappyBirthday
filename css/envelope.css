@@ -1,0 +1,97 @@
+/* =========================================================
+   Envelope Page — transisi antara login (exact match) & birthday
+   ========================================================= */
+
+.envelope-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 32px 20px;
+}
+
+.envelope-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.envelope-btn:focus-visible {
+  outline: 3px dashed var(--text-main);
+  outline-offset: 6px;
+}
+
+.envelope-img {
+  display: block;
+  width: 240px;
+  height: auto;
+  image-rendering: pixelated;
+  animation: pop-in 1.5s ease;
+  animation: envelope-wiggle 2.2s ease-in-out infinite;
+  transition: transform 0.15s steps(2);
+}
+
+.envelope-btn:hover .envelope-img {
+  transform: scale(1.04);
+}
+
+.envelope-btn.is-open .envelope-img {
+  animation: none;
+}
+
+.envelope-btn.is-open {
+  cursor: default;
+  pointer-events: none;
+}
+
+@keyframes envelope-wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  20% { transform: rotate(-4deg); }
+  40% { transform: rotate(3deg); }
+  60% { transform: rotate(-2deg); }
+  80% { transform: rotate(2deg); }
+}
+
+.envelope-hint {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-soft);
+  animation: hint-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes hint-pulse {
+  0%, 100% { opacity: 0.65; }
+  50% { opacity: 1; }
+}
+
+@keyframes pop-in {
+  0% { transform: scale(0.7); opacity: 0; }
+  60% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+
+.envelope-btn.is-open ~ .envelope-hint {
+  animation: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .envelope-img {
+    animation: none;
+  }
+  .envelope-hint {
+    animation: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .envelope-img {
+    width: 190px;
+  }
+}

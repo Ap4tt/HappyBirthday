@@ -1,0 +1,355 @@
+.login-page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  overflow: hidden;
+}
+
+.invite-card {
+  --border-w: clamp(5px, 1.8vw, 10px);
+  --shadow-offset: clamp(12px, 4.5vw, 23px); 
+  --card-shadow: clamp(4px, 1.6vw, 8px);
+
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  background: var(--cream);
+  border: var(--border-w) solid var(--text-main);
+  box-shadow: var(--card-shadow) var(--card-shadow) 0 0 var(--red-dark);
+  padding: clamp(22px, 8vw, 44px) clamp(16px, 6.5vw, 32px) clamp(18px, 6vw, 34px);
+  text-align: center;
+  z-index: 1;
+  overflow: visible;
+  animation: pop-in 1s ease;
+}
+
+
+.corner-drip {
+  position: absolute;
+  pointer-events: none;
+}
+
+.corner-drip-tr {
+  top: calc(var(--shadow-offset) * -1.2);
+  right: calc(var(--shadow-offset) * -1.2);
+  width: clamp(150px, 32vw, 200px);
+  aspect-ratio: 200 / 210; /* rasio asli dikunci, tinggi ngikut otomatis */
+  height: auto;
+  animation: pop-in 1.5s ease;
+}
+
+.corner-drip-bl {
+  bottom: calc(var(--shadow-offset) * -1.6);
+  left: calc(var(--shadow-offset) * -1);
+  width: clamp(190px, 38vw, 240px);
+  aspect-ratio: 240 / 200; /* rasio asli dikunci */
+  height: auto;
+  animation: pop-in 1.5s ease;
+}
+
+.siapa-kamu {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 2vw, 12px);
+  font-family: var(--font-display);
+  font-size: clamp(0.85rem, 3.8vw, 1.2rem);
+  line-height: 1.6;
+  color: var(--red);
+  letter-spacing: 1px;
+  margin-bottom: clamp(20px, 6vw, 30px);
+  animation: pop-in 1.5s ease;
+  padding-top: 3px;
+}
+
+.siapa-kamu::before,
+.siapa-kamu::after {
+  content: "✦";
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--pink-deep);
+  position: relative;
+  top: -4px;
+}
+
+@keyframes pop-in {
+  0% { transform: scale(0.7); opacity: 0; }
+  60% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+.field {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.field label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.field input {
+  width: 100%;
+  font-size: 1rem;
+  color: var(--text-main);
+  background: #fff;
+  border: 3px solid var(--text-main);
+  padding: 12px 12px;
+  outline: none;
+  transition: box-shadow 0.12s ease, border-color 0.12s ease;
+}
+
+.field input::placeholder {
+  color: #C99AA6;
+}
+
+.field input:focus {
+  border-color: var(--red);
+  box-shadow: 3px 3px 0 0 var(--pink-deep);
+}
+
+.field input.has-error {
+  border-color: var(--red-dark);
+}
+
+.date-select-group {
+  display: flex;
+  gap: clamp(6px, 2vw, 10px);
+}
+
+.pixel-dropdown {
+  position: relative;
+  flex: 1;
+  min-width: 0; 
+}
+
+.dropdown-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: clamp(0.78rem, 2.6vw, 0.95rem);
+  color: var(--text-main);
+  background: #fff;
+  border: 3px solid var(--text-main);
+  padding: clamp(10px, 3vw, 12px) clamp(6px, 2vw, 10px);
+  outline: none;
+  cursor: pointer;
+  transition: box-shadow 0.12s ease, border-color 0.12s ease;
+}
+
+.dropdown-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pixel-dropdown[data-placeholder="true"] .dropdown-value {
+  color: #C99AA6;
+}
+
+.dropdown-arrow {
+  flex-shrink: 0;
+  font-size: clamp(0.5rem, 1.6vw, 0.6rem);
+  transition: transform 0.15s steps(2);
+}
+
+.dropdown-trigger:focus-visible {
+  border-color: var(--red);
+  box-shadow: 3px 3px 0 0 var(--pink-deep);
+}
+
+.pixel-dropdown.is-open .dropdown-trigger {
+  border-color: var(--red);
+  box-shadow: 3px 3px 0 0 var(--pink-deep);
+}
+
+.pixel-dropdown.is-open .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-trigger.has-error {
+  border-color: var(--red-dark);
+}
+
+/* Panel list — muncul di bawah trigger (atau di atas, lewat .drops-up) */
+.dropdown-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 10;
+  background: var(--cream);
+  border: 3px solid var(--text-main);
+  box-shadow: 5px 5px 0 0 var(--red-dark);
+  overflow: hidden;
+  transform-origin: top center;
+  animation: dropdown-pop 0.14s steps(3) both;
+}
+
+.pixel-dropdown.drops-up .dropdown-panel {
+  top: auto;
+  bottom: calc(100% + 6px);
+  transform-origin: bottom center;
+}
+
+@keyframes dropdown-pop {
+  0% { transform: scaleY(0.6); opacity: 0; }
+  100% { transform: scaleY(1); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dropdown-panel {
+    animation: none;
+  }
+}
+
+.dropdown-list {
+  position: relative;
+  z-index: 2;
+  list-style: none;
+  max-height: 190px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--pink-deep) var(--cream);
+}
+
+.dropdown-option {
+  position: relative;
+  padding: 10px 14px;      /* dari: 10px 14px 10px 24px -> disamain kiri-kanan */
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-main);
+  cursor: pointer;
+  background-image: linear-gradient(to right, var(--pink-deep) 50%, transparent 0%);
+  background-position: bottom;
+  background-size: 8px 3px;
+  background-repeat: repeat-x;
+}
+
+.dropdown-option:last-child {
+  background-image: none;
+}
+
+/* percikan/sprinkle kecil yang "pop" di sebelah teks pas di-hover */
+.dropdown-option::before {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  background: var(--red);
+  transform: translate(-3px, -50%) scale(0);
+  transition: transform 0.1s steps(2);
+}
+
+.dropdown-option:hover,
+.dropdown-option.is-active {
+  background-color: var(--pink-bg);
+}
+
+.dropdown-option:hover::before,
+.dropdown-option.is-active::before {
+  transform: translate(0, -50%) scale(1);
+}
+
+.dropdown-option.is-selected {
+  color: var(--red);
+  font-weight: 700;
+}
+
+.field:nth-of-type(1) {
+  animation: pop-in 1.5s ease;
+
+}
+
+.field:nth-of-type(2) {
+  animation: pop-in 1.5s ease;
+}
+
+.pixel-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  line-height: 1.4;
+  color: var(--cream);
+  background: var(--red);
+  border: 3px solid var(--text-main);
+  padding: 16px 22px;
+  box-shadow: 5px 5px 0 0 var(--text-main);
+  animation: pop-in 1.5s ease;
+  transition: transform 0.08s steps(2), box-shadow 0.08s steps(2), background 0.15s ease;
+}
+
+.pixel-btn:hover {
+  background: var(--red-dark);
+}
+
+.pixel-btn:active {
+  transform: translate(5px, 5px);
+  box-shadow: 0 0 0 0 var(--text-main);
+}
+
+.pixel-btn:focus-visible {
+  outline: 3px dashed var(--text-main);
+  outline-offset: 4px;
+}
+
+.btn-arrow {
+  display: inline-block;
+}
+
+.field-error {
+  display: none;
+  font-size: 0.75rem;
+  color: var(--red-dark);
+  margin-top: 6px;
+}
+
+.field-error.is-visible {
+  display: block;
+}
+
+@keyframes field-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+.field.shake {
+  animation: field-shake 0.4s ease;
+}
+
+.invite-card .pixel-btn {
+  width: 100%;
+  margin-top: 6px;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .corner-drip-tr,
+  .corner-drip-bl,
+  .field:nth-of-type(1),
+  .field:nth-of-type(2),
+  .pixel-btn {
+    animation: none;
+  }
+}
