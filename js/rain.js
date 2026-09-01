@@ -1,6 +1,6 @@
 (function () {
   const RAIN_SRCS = ['images/Flower1.png', 'images/Flower2.png', 'images/Heart1.png', 'images/Heart2.png'];
-  const RAIN_COUNT = 40;
+  const RAIN_COUNT = 30;
   const OPEN_DURATION = 420; // ms, harus match .wish-box.is-opening di CSS
   const CLOSE_DURATION = 320; // ms, harus match .wish-box.is-closing di CSS
 
