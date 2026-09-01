@@ -20,7 +20,7 @@
     "'Akronim'",
     "'Black Ops One'",
     "'Lobster Two'",
-    "'FontdinerSwanky'",
+    "'Fontdiner Swanky'",
     "'Dancing Script'",
     "'Pacifico'",
     "'Kablammo'",
