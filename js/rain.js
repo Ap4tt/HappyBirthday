@@ -200,7 +200,7 @@
     const size = 26 + Math.random() * 28;
     const left = Math.random() * 100;
     const duration = 5 + Math.random() * 10;
-    const delay = Math.random() * +duration; // negatif = udah "lagi jatuh" pas halaman kebuka
+    const delay = Math.random() * +duration; 
     const sway = 5 + Math.random() * 5;
     const rot = Math.random() * 46 - 23;
     const opacity = 0.6 + Math.random() * 0.35;
