@@ -85,7 +85,7 @@ html, body {
   text-align: center;
   padding: 24px;
   pointer-events: none; 
-  transform: translateY(-70px);
+  transform: translateY(-18px);
 }
 
 .bday-hello {
@@ -267,6 +267,9 @@ html, body {
 }
 
 @media (max-width: 640px) {
+  .birthday-content {
+    transform: translateY(-70px); /* angka lebih kecil buat mobile */
+  }
   .wish-close-fixed {
     bottom: 18px;
     width: 36px;
