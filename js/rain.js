@@ -1,5 +1,10 @@
 (function () {
-  const RAIN_SRCS = ['images/Flower1.png', 'images/Flower2.png', 'images/Heart1.png', 'images/Heart2.png'];
+  const RAIN_SRCS = [
+  'images/Flower1.png', 'images/Flower2.png',
+  'images/Heart1.png', 'images/Heart2.png',
+  'images/Heart1.png', 'images/Heart2.png',
+  'images/Heart1.png', 'images/Heart2.png'
+];
   const RAIN_COUNT = window.innerWidth <= 640 ? 20 : 30;
   const OPEN_DURATION = 420; // ms, harus match .wish-box.is-opening di CSS
   const CLOSE_DURATION = 320; // ms, harus match .wish-box.is-closing di CSS
@@ -202,8 +207,8 @@
     const left = Math.random() * 100;
     const duration = isMobile ? (7 + Math.random() * 8) : (5 + Math.random() * 10);
     const delay = Math.random() * +duration; 
-    const sway = isMobile ? (4 + Math.random() * 5) : (18 + Math.random() * 36);
-    const rot = isMobile ? (Math.random() * 8 - 4) : (Math.random() * 26 - 13);
+    const sway = isMobile ? (2 + Math.random() * 2) : (18 + Math.random() * 36);
+    const rot = isMobile ? (Math.random() * 5 - 4) : (Math.random() * 26 - 13);
     const opacity = 0.6 + Math.random() * 0.35;
 
     el.style.width = size + 'px';

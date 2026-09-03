@@ -71,7 +71,7 @@
     setInterval(function () {
       fontIndex = (fontIndex + 1) % NAME_FONTS.length;
       nameEl.style.fontFamily = NAME_FONTS[fontIndex];
-    }, 250);
+    }, 275);
   }
 
   applyLanguage(currentLang);
