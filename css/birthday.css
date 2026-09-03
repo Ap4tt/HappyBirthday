@@ -268,7 +268,7 @@ html, body {
 
 @media (max-width: 640px) {
   .birthday-content {
-    transform: translateY(-15px); 
+    transform: translateY(-20px); 
   }
   .wish-close-fixed {
     bottom: 18px;
