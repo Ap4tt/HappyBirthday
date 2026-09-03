@@ -22,8 +22,7 @@
     "'Lobster Two'",
     "'Fontdiner Swanky'",
     "'Dancing Script'",
-    "'Pacifico'",
-    "'Kablammo'",
+    "'Pacifico'"
   ];
 
   function pick(arr) {

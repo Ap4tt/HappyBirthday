@@ -1,7 +1,7 @@
 
 const BURST_FLOWER_SRCS = ['images/Flower1.png', 'images/Flower2.png'];
 const BURST_HEART_SRCS = ['images/Heart1.png', 'images/Heart2.png'];
-const BURST_FLOWER_RATIO = 0.68;
+const BURST_FLOWER_RATIO = 0.50;
 const BURST_SIZE_MIN = 100;
 const BURST_SIZE_MAX = 300;
 const BURST_CELL_SIZE = 160;
