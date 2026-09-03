@@ -1,6 +1,6 @@
 (function () {
   const RAIN_SRCS = ['images/Flower1.png', 'images/Flower2.png', 'images/Heart1.png', 'images/Heart2.png'];
-  const RAIN_COUNT = 30;
+  const RAIN_COUNT = window.innerWidth <= 640 ? 17 : 30;
   const OPEN_DURATION = 420; // ms, harus match .wish-box.is-opening di CSS
   const CLOSE_DURATION = 320; // ms, harus match .wish-box.is-closing di CSS
 
@@ -197,7 +197,8 @@
     el.alt = '';
     el.className = 'rain-item';
 
-    const size = 26 + Math.random() * 28;
+    const isMobile = window.innerWidth <= 640;
+    const size = isMobile ? (18 + Math.random() * 20) : (26 + Math.random() * 28);
     const left = Math.random() * 100;
     const duration = 5 + Math.random() * 10;
     const delay = Math.random() * +duration; 
