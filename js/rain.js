@@ -198,7 +198,7 @@
     el.className = 'rain-item';
 
     const isMobile = window.innerWidth <= 640;
-    const size = isMobile ? (18 + Math.random() * 20) : (26 + Math.random() * 28);
+    const size = isMobile ? (22 + Math.random() * 20) : (26 + Math.random() * 28);
     const left = Math.random() * 100;
     const duration = isMobile ? (7 + Math.random() * 8) : (5 + Math.random() * 10);
     const delay = Math.random() * +duration; 
