@@ -202,8 +202,8 @@
     const left = Math.random() * 100;
     const duration = isMobile ? (7 + Math.random() * 8) : (5 + Math.random() * 10);
     const delay = Math.random() * +duration; 
-    const sway = 5 + Math.random() * 5;
-    const rot = Math.random() * 46 - 23;
+    const sway = isMobile ? (4 + Math.random() * 5) : (18 + Math.random() * 36);
+    const rot = isMobile ? (Math.random() * 8 - 4) : (Math.random() * 26 - 13);
     const opacity = 0.6 + Math.random() * 0.35;
 
     el.style.width = size + 'px';
