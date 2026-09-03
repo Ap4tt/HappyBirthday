@@ -23,7 +23,6 @@
     "'Fontdiner Swanky'",
     "'Dancing Script'",
     "'Pacifico'",
-    "'Kablammo'",
   ];
 
   function pick(arr) {
