@@ -65,6 +65,9 @@ html, body {
   top: 16px;
   left: 16px;
   z-index: 1;
+  width: 30px;        /* WAJIB — ini yang selama ini gak ada */
+  height: 30px;        /* WAJIB */
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -91,8 +94,8 @@ html, body {
 
 @media (max-width: 420px) {
   .badge-trigger {
-    top: 12px;
-    left: 18px;
+    top: 13px;
+    left: 16px;
   }
 }
 
@@ -223,7 +226,7 @@ html, body {
     top: auto;              /* lepas dari posisi tengah vertikal */
     bottom: auto;
     left: 16px;              /* samain sama posisi .badge-trigger di mobile */
-    top: 62px;               /* pas di bawah badge (badge top:9px + tinggi 44px + jarak ~9px) */
+    top: 55px;               /* pas di bawah badge (badge top:9px + tinggi 44px + jarak ~9px) */
     transform: none;         /* hapus translateY(-50%) yang bikin dia ke-tengah */
   }
 

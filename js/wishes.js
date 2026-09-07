@@ -259,10 +259,10 @@ const AGE_PHRASES = {
 const BONUS_WISH = {
   id: {
     title: 'Ucapan Rahasia',
-    paragraphs: [ 'ZZZ' ]
+    paragraphs: [ 'Masih Dikembangkan' ]
   },
   en: {
     title: 'A Secret Message',
-    paragraphs: [ 'ZZZ' ]
+    paragraphs: [ 'Still In Development' ]
   }
 };
