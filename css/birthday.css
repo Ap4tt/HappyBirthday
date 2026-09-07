@@ -63,7 +63,7 @@ html, body {
 .badge-trigger {
   position: fixed;
   top: 16px;
-  left: 12px;
+  left: 16px;
   z-index: 1;
   display: flex;
   align-items: center;
@@ -228,7 +228,7 @@ html, body {
   }
 
   .progress-number {
-    top: 130px;
+    top: 125px;
     left: 40px;
   }
 }
