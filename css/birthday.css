@@ -174,8 +174,8 @@ html, body {
 }
 
 @keyframes celebrate-slide-away {
-  0%   { transform: translateY(0) scale(1); opacity: 1; }
-  100% { transform: translateY(-60px) scale(0.9); opacity: 0; }
+  0%   { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-120vh); opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -234,6 +234,17 @@ html, body {
     top: 125px;
     left: 40px;
   }
+}
+
+.progress-frame,
+.progress-number {
+  transition: opacity 0.3s ease;
+}
+
+.progress-frame.is-hidden-mobile,
+.progress-number.is-hidden-mobile {
+  opacity: 0;
+  pointer-events: none;
 }
  
 /* ---- Nama & umur — di tengah layar ---- */
@@ -333,7 +344,7 @@ html, body {
   100% {
     transform: scale(1);
     opacity: 1;
-    border-radius: 8px;
+    border-radius: 30px;
   }
 }
 
@@ -341,7 +352,7 @@ html, body {
   0% {
     transform: scale(1);
     opacity: 1;
-    border-radius: 8px;
+    border-radius: 30px;
   }
   100% {
     transform: scale(0.04);

@@ -23,9 +23,9 @@
   const progressNumber = document.getElementById('progressNumber');
   const celebrateOverlay = document.getElementById('celebrateOverlay');
   const celebrateCard = document.getElementById('celebrateCard');
-  const CELEBRATE_OPEN_DURATION = 550;
-  const CELEBRATE_CLOSE_DURATION = 400;
-  const CELEBRATE_HOLD_DURATION = 2400; // lama nampil sebelum otomatis geser ilang
+  const CELEBRATE_OPEN_DURATION = 600;
+  const CELEBRATE_CLOSE_DURATION = 600;
+  const CELEBRATE_HOLD_DURATION = 3000; // lama nampil sebelum otomatis geser ilang
   const seenWishes = new Set(); // nyimpen index ucapan yang udah pernah ketemu
   
   if (!layer || !wishOverlay || !wishBox) return;
@@ -56,9 +56,6 @@
   renderRainHint();
   updateProgress();
 
-  // Render ulang teks ucapan pakai currentWishIndex yang UDAH ADA,
-  // cuma ganti sumber bahasanya (WISHES.id / WISHES.en). Ucapannya
-  // sendiri gak ikut ganti, cuma diterjemahin.
   function renderWishText() {
     const lang = currentLang();
     const list = WISHES[lang];
@@ -80,9 +77,6 @@
     });
   }
 
-  // Pilih ucapan BARU secara random (index berubah), lalu render.
-  // Ini yang dipanggil tiap kali tetesan hujan diklik, biar tiap
-  // klik selalu dapet ucapan yang beda dari sebelumnya.
   function pickNewWish() {
     const lang = currentLang();
     const list = WISHES[lang];
@@ -130,6 +124,13 @@
     }
   }
 
+  function hideProgressOnMobileAfterBadgeOpen() {
+    if (window.innerWidth <= 640) {
+      document.getElementById('progressFrame').classList.add('is-hidden-mobile');
+      document.getElementById('progressNumber').classList.add('is-hidden-mobile');
+    }
+  }
+
   function celebrate() {
     const rect = badgeTrigger.getBoundingClientRect();
     const originX = rect.left + rect.width / 2;
@@ -153,13 +154,6 @@
     }, CELEBRATE_OPEN_DURATION);
   }
 
-  // Set transform-origin si wish-box supaya animasi scale-nya
-  // seolah muncul/kesedot dari titik (px, py) di layar (viewport
-  // coords, misal dari event.clientX/clientY). Caranya: ambil
-  // posisi & ukuran wish-box ASLI (posisi center normalnya, belum
-  // di-scale), terus hitung offset titik target relatif ke box
-  // itu — offset ini boleh di luar 0-100%, itu justru yang bikin
-  // pivot animasinya "keluar" dari box menuju titik di luar box.
   function setTransformOriginToPoint(px, py) {
     const rect = wishBox.getBoundingClientRect();
     const originX = px - rect.left;
@@ -212,8 +206,6 @@
     }
 
     wishBox.classList.remove('is-closing');
-    // Force reflow biar animasi 'is-opening' ke-restart bersih
-    // walau sebelumnya sempet ke-trigger (misal buka-tutup cepat).
     void wishBox.offsetWidth;
     wishBox.classList.add('is-opening');
 
@@ -255,6 +247,7 @@
 
   badgeTrigger.addEventListener('click', function () {
     if (!badgeTrigger.classList.contains('is-unlocked')) return;
+    hideProgressOnMobileAfterBadgeOpen();
     if (isOpen || isAnimating) return;   // BARU
     isAnimating = true;
     const lang = currentLang();
@@ -334,15 +327,10 @@
       openWish(e.clientX, e.clientY);
     });
 
-    // Tiap kali 1 putaran jatuh kelar (animasi loop balik ke 0%),
-    // re-random posisi horizontal (+ sway/rotasi) biar gak keliatan
-    // "jalur yang itu-itu aja" tiap kali. Momen loop ini udah otomatis
-    // ada loncatan visual (dari bawah balik ke atas), jadi ganti
-    // posisi di titik yang sama gak nambah jump yang keliatan aneh.
     el.addEventListener('animationiteration', function () {
       const newLeft = Math.random() * 100;
-      const newSway = 18 + Math.random() * 36;
-      const newRot = Math.random() * 26 - 13;
+      const newSway = isMobile ? (2 + Math.random() * 2) : (18 + Math.random() * 36);
+      const newRot = isMobile ? (Math.random() * 5 - 4) : (Math.random() * 26 - 13);
 
       el.style.left = newLeft + '%';
       el.style.setProperty('--sway', newSway.toFixed(0) + 'px');
