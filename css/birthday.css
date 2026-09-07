@@ -228,10 +228,8 @@ html, body {
   }
 
   .progress-number {
-    top: auto;
+    top: 130px;
     left: 40px;
-    transform: rotate(-90deg);
-    transform-origin: left top;
   }
 }
  
