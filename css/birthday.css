@@ -217,6 +217,23 @@ html, body {
   color: var(--text-main);
   white-space: nowrap;
 }
+
+@media (max-width: 640px) {
+  .progress-frame {
+    top: auto;              /* lepas dari posisi tengah vertikal */
+    bottom: auto;
+    left: 16px;              /* samain sama posisi .badge-trigger di mobile */
+    top: 62px;               /* pas di bawah badge (badge top:9px + tinggi 44px + jarak ~9px) */
+    transform: none;         /* hapus translateY(-50%) yang bikin dia ke-tengah */
+  }
+
+  .progress-number {
+    top: auto;
+    left: 40px;
+    transform: rotate(-90deg);
+    transform-origin: left top;
+  }
+}
  
 /* ---- Nama & umur — di tengah layar ---- */
 .birthday-content {
