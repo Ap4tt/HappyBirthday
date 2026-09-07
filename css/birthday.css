@@ -91,7 +91,7 @@ html, body {
 
 @media (max-width: 420px) {
   .badge-trigger {
-    top: 9px;
+    top: 12px;
     left: 16px;
   }
 }
