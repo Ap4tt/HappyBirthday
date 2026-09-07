@@ -1,4 +1,4 @@
-window.SONGS = [
+windowSONGS = [
   { title: 'Every Summertime - NIKI', src: 'audio/Every Summertime.mp3' },
   { title: 'Akad -  Payung Teduh', src: 'audio/Akad.mp3' },
   { title: 'The Shade - Rex Orange County', src: 'audio/The Shade.mp3'},

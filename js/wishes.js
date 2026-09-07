@@ -255,3 +255,14 @@ const AGE_PHRASES = {
     'today you unlocked age {age}'
   ]
 };
+
+const BONUS_WISH = {
+  id: {
+    title: 'Ucapan Rahasia',
+    paragraphs: [ 'ZZZ' ]
+  },
+  en: {
+    title: 'A Secret Message',
+    paragraphs: [ 'ZZZ' ]
+  }
+};

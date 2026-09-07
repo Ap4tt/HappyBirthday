@@ -18,12 +18,23 @@
   const rainHintText = document.getElementById('rainHintText');
   const rainHint = document.getElementById('rainHint');
   const blurWrapper = document.getElementById('blurWrapper');
-
+  const badgeTrigger = document.getElementById('badgeTrigger');
+  const progressFill = document.getElementById('progressFill');
+  const progressNumber = document.getElementById('progressNumber');
+  const celebrateOverlay = document.getElementById('celebrateOverlay');
+  const celebrateCard = document.getElementById('celebrateCard');
+  const CELEBRATE_OPEN_DURATION = 550;
+  const CELEBRATE_CLOSE_DURATION = 400;
+  const CELEBRATE_HOLD_DURATION = 2400; // lama nampil sebelum otomatis geser ilang
+  const seenWishes = new Set(); // nyimpen index ucapan yang udah pernah ketemu
+  
   if (!layer || !wishOverlay || !wishBox) return;
 
+  let pendingCelebration = false; // true kalau baru aja komplit TAPI wishbox masih kebuka
   let currentWishIndex = null;
   let isOpen = false;
   let isAnimating = false;
+  let hasCelebrated = false;
   let rainHintClickCount = 0;
 
   function pick(arr) {
@@ -43,6 +54,7 @@
   }
 
   renderRainHint();
+  updateProgress();
 
   // Render ulang teks ucapan pakai currentWishIndex yang UDAH ADA,
   // cuma ganti sumber bahasanya (WISHES.id / WISHES.en). Ucapannya
@@ -81,11 +93,64 @@
         next = Math.floor(Math.random() * list.length);
       } while (next === currentWishIndex);
       currentWishIndex = next;
+      seenWishes.add(currentWishIndex);
+      updateProgress();
+      if (seenWishes.size >= WISHES[currentLang()].length && !hasCelebrated) {
+        pendingCelebration = true;
+        hasCelebrated = true;  
+        }
     } else {
       currentWishIndex = 0;
+      seenWishes.add(currentWishIndex);
+      updateProgress();
+      if (seenWishes.size >= WISHES[currentLang()].length && !hasCelebrated) {
+        pendingCelebration = true;
+        hasCelebrated = true;  
+      }
     }
 
     renderWishText();
+  }
+
+  function updateProgress() {
+    const lang = currentLang();
+    const total = WISHES[lang].length;
+    const count = seenWishes.size;
+
+    progressFill.style.height = (count / total * 100) + '%';
+    progressNumber.textContent = count + '/' + total;
+
+    if (count >= total) {
+      badgeTrigger.classList.remove('is-locked');
+      badgeTrigger.classList.add('is-unlocked');
+
+      const badgeImg = document.getElementById('badgeImg');
+      badgeImg.hidden = false;
+      badgeImg.src = 'images/badge-unlocked.png';
+    }
+  }
+
+  function celebrate() {
+    const rect = badgeTrigger.getBoundingClientRect();
+    const originX = rect.left + rect.width / 2;
+    const originY = rect.top + rect.height / 2;
+
+    celebrateCard.style.transformOrigin = originX + 'px ' + originY + 'px';
+    celebrateOverlay.hidden = false;
+    celebrateCard.classList.add('is-opening');
+
+    window.setTimeout(function () {
+      celebrateCard.classList.remove('is-opening');
+
+      window.setTimeout(function () {
+        celebrateCard.classList.add('is-closing');
+
+        window.setTimeout(function () {
+          celebrateCard.classList.remove('is-closing');
+          celebrateOverlay.hidden = true;
+        }, CELEBRATE_CLOSE_DURATION);
+      }, CELEBRATE_HOLD_DURATION);
+    }, CELEBRATE_OPEN_DURATION);
   }
 
   // Set transform-origin si wish-box supaya animasi scale-nya
@@ -116,7 +181,12 @@
       renderRainHint(); // klik ke-1: ganti teksnya
     } else if (rainHintClickCount >= 2) {
       if (rainHint) rainHint.classList.add('is-hidden'); // klik ke-2 dst: baru ilang
+      if (!badgeTrigger.classList.contains('is-unlocked')){
+        badgeTrigger.classList.add('is-visible'); // BARU — badge muncul begitu hint bener2 ilang
+        badgeTrigger.classList.add('is-locked');   // BARU — mulai dalam state locked
+      }
     }
+      
     // Kalau card udah kebuka (atau lagi dalam proses buka/tutup),
     // abaikan klik hujan lain — jangan reset ke ucapan/posisi baru
     // sampai user nutup card yang lagi tampil dulu.
@@ -173,10 +243,50 @@
       layer.style.pointerEvents = ''; // balikin rain-item bisa diklik lagi
       isOpen = false;
       isAnimating = false;
+
+      if(pendingCelebration){
+        pendingCelebration = false;
+        celebrate();
+      }
     }, CLOSE_DURATION);
   }
 
   wishClose.addEventListener('click', closeWish);
+
+  badgeTrigger.addEventListener('click', function () {
+    if (!badgeTrigger.classList.contains('is-unlocked')) return;
+    if (isOpen || isAnimating) return;   // BARU
+    isAnimating = true;
+    const lang = currentLang();
+    const bonus = BONUS_WISH[lang];
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get('name') || I18N[lang].defaultName;
+
+    wishTitleEl.textContent = bonus.title;
+    wishParagraphsEl.innerHTML = '';
+    bonus.paragraphs.forEach(function (p) {
+      const el = document.createElement('p');
+      el.textContent = p.replace(/\{name\}/g, name);
+      wishParagraphsEl.appendChild(el);
+    });
+
+    const rect = badgeTrigger.getBoundingClientRect();
+    const originX = rect.left + rect.width / 2;
+    const originY = rect.top + rect.height / 2;
+
+    wishOverlay.hidden = false;
+    blurWrapper.classList.add('is-blurred');
+    wishClose.classList.add('is-visible');
+    isOpen = true;
+    setTransformOriginToPoint(originX, originY);
+    wishBox.classList.remove('is-closing');
+    void wishBox.offsetWidth;
+    wishBox.classList.add('is-opening');
+    window.setTimeout(function () {
+      wishBox.classList.remove('is-opening');
+      isAnimating = false
+    }, OPEN_DURATION);
+  });
 
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && isOpen) closeWish();

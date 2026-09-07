@@ -35,6 +35,15 @@
       <p id="rainHintText"></p>
     </div>
 
+    <div class="badge-trigger" id="badgeTrigger" aria-label="Achievement">
+      <img src="images/badge-locked.png" id="badgeImg" alt="" onerror="this.hidden=true;" />
+    </div>
+
+    <div class="progress-frame" id="progressFrame">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-number" id="progressNumber"></div>
+
     <main class="birthday-content">
       <p class="bday-hello" id="bdayHello"></p>
       <h1 class="bday-name" id="bdayName"></h1>
@@ -83,6 +92,26 @@
   <div class="burst-layer" id="burstLayer" aria-hidden="true"></div>
 
   <p class="made-by">&ltMade by Apat&gt</p>
+
+<div class="celebrate-overlay" id="celebrateOverlay" hidden>
+  <div class="celebrate-card" id="celebrateCard">
+    <svg class="celebrate-text-top" viewBox="0 0 300 60">
+      <path id="curveTop" d="M 20 50 Q 150 0 280 50" fill="transparent"/>
+     <text font-size="25" fill="var(--text-main)" font-family="Press Start 2P, monospace">
+        <textPath href="#curveTop" startOffset="50%" text-anchor="middle">YEY YOU GET A BADGE!</textPath>
+     </text>
+    </svg>
+
+    <img src="images/badge-unlocked.png" id="celebrateBadgeImg" alt="" onerror="this.hidden=true;" />
+
+    <svg class="celebrate-text-bottom" viewBox="0 0 300 60">
+      <path id="curveBottom" d="M 20 10 Q 150 60 280 10" fill="transparent"/>
+      <text font-size="25" fill="var(--text-main)" font-family="Press Start 2P, monospace">
+        <textPath href="#curveBottom" startOffset="50%" text-anchor="middle">CHECK IT NOW!</textPath>
+      </text>
+    </svg>
+  </div>
+</div>
 
   <script src="js/i18n.js"></script>
   <script src="js/wishes.js"></script>
