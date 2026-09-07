@@ -63,7 +63,7 @@ html, body {
 .badge-trigger {
   position: fixed;
   top: 16px;
-  left: 16px;
+  left: 12px;
   z-index: 1;
   width: 30px;        /* WAJIB — ini yang selama ini gak ada */
   height: 30px;        /* WAJIB */
@@ -95,7 +95,7 @@ html, body {
 @media (max-width: 420px) {
   .badge-trigger {
     top: 13px;
-    left: 16px;
+    left: 12px;
   }
 }
 
