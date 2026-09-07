@@ -63,7 +63,7 @@ html, body {
 .badge-trigger {
   position: fixed;
   top: 16px;
-  left: 20px;
+  left: 16px;
   z-index: 1;
   display: flex;
   align-items: center;
