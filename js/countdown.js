@@ -3,6 +3,7 @@
   const name = params.get('name') || '';
   const day = Number(params.get('day'));
   const month = Number(params.get('month'));
+  const yearParam = params.get('year') || '';
   const urlLang = params.get('lang');
 
   const pageType = document.body.getAttribute('data-page'); 
@@ -27,6 +28,21 @@
   const valSeconds = document.getElementById('cdSeconds');
 
   let targetDate = null;
+
+  let redirecting = false;
+
+  function redirectToEnvelope() {
+    if (redirecting) return;
+    redirecting = true;
+
+    const url = new URL('envelope.html', window.location.href);
+    url.searchParams.set('name', name);
+    url.searchParams.set('day', day);
+    url.searchParams.set('month', month);
+    url.searchParams.set('year', yearParam);
+    url.searchParams.set('lang', currentLang);
+    window.location.href = url.toString();
+}
 
   // Khusus 29 Februari: dicariin tahun kabisat berikutnya yang
   // beneran punya tanggal itu (bisa beberapa tahun ke depan),
@@ -121,6 +137,11 @@
   function tick() {
     const now = new Date();
 
+    if (targetDate && targetDate <= now) {
+      redirectToEnvelope();
+      return;
+    }
+
     if (!targetDate || targetDate <= now) {
       targetDate = getNextOccurrence(day, month, now);
       msgDate.textContent = formatDate(targetDate, currentLang);
@@ -140,8 +161,16 @@
 
   applyLanguage(currentLang);
 
+  const debugSeconds = params.get('debugSeconds');
+  
+  if (debugSeconds) {
+    targetDate = new Date(Date.now() + Number(debugSeconds) * 1000);
+    msgDate.textContent = formatDate(targetDate, currentLang);
+  }
+
   if (day && month) {
     tick();
     setInterval(tick, 1000);
   }
 })();
+
