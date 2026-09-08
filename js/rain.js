@@ -36,6 +36,7 @@
   let isAnimating = false;
   let hasCelebrated = false;
   let rainHintClickCount = 0;
+  let activeRenderer = null; // BARU — fungsi render yang dipanggil ulang pas toggle bahasa
 
   function pick(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
@@ -189,6 +190,7 @@
     isAnimating = true;
 
     pickNewWish();
+    activeRenderer = renderWishText;
 
     wishOverlay.hidden = false;
     blurWrapper.classList.add('is-blurred');
@@ -235,6 +237,7 @@
       layer.style.pointerEvents = ''; // balikin rain-item bisa diklik lagi
       isOpen = false;
       isAnimating = false;
+      activeRenderer = null;
 
       if(pendingCelebration){
         pendingCelebration = false;
@@ -245,11 +248,7 @@
 
   wishClose.addEventListener('click', closeWish);
 
-  badgeTrigger.addEventListener('click', function () {
-    if (!badgeTrigger.classList.contains('is-unlocked')) return;
-    hideProgressOnMobileAfterBadgeOpen();
-    if (isOpen || isAnimating) return;   // BARU
-    isAnimating = true;
+  function renderBonus() {
     const lang = currentLang();
     const bonus = BONUS_WISH[lang];
     const params = new URLSearchParams(window.location.search);
@@ -262,6 +261,15 @@
       el.textContent = p.replace(/\{name\}/g, name);
       wishParagraphsEl.appendChild(el);
     });
+  }
+
+  badgeTrigger.addEventListener('click', function () {
+    if (!badgeTrigger.classList.contains('is-unlocked')) return;
+    if (isOpen || isAnimating) return;
+    isAnimating = true;
+
+    renderBonus();
+    activeRenderer = renderBonus; // BARU — biar toggle bahasa manggil ini, bukan renderWishText
 
     const rect = badgeTrigger.getBoundingClientRect();
     const originX = rect.left + rect.width / 2;
@@ -277,7 +285,7 @@
     wishBox.classList.add('is-opening');
     window.setTimeout(function () {
       wishBox.classList.remove('is-opening');
-      isAnimating = false
+      isAnimating = false;
     }, OPEN_DURATION);
   });
 
@@ -289,9 +297,9 @@
   // (jangan random ulang, cuma translate wish yang sama).
   document.querySelectorAll('.lang-toggle-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
-    renderRainHint();
+      renderRainHint();
       if (isOpen) {
-        setTimeout(renderWishText, 0);
+        setTimeout(activeRenderer, 0);
       }
     });
   });
