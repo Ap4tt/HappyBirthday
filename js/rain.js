@@ -337,8 +337,8 @@
 
     el.addEventListener('animationiteration', function () {
       const newLeft = Math.random() * 100;
-      const newSway = isMobile ? (2 + Math.random() * 2) : (18 + Math.random() * 36);
-      const newRot = isMobile ? (Math.random() * 5 - 4) : (Math.random() * 26 - 13);
+      const newSway = isMobile ? (10 + Math.random() * 12) : (18 + Math.random() * 36);
+      const newRot = isMobile ? (Math.random() * 12 - 6) : (Math.random() * 26 - 13);
 
       el.style.left = newLeft + '%';
       el.style.setProperty('--sway', newSway.toFixed(0) + 'px');
